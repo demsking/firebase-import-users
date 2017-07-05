@@ -1,0 +1,15 @@
+{
+  "name": "import-firebase-users",
+  "version": "1.0.0",
+  "description": "This script helps to import a users list from a CSV file to Firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sébastien Demanou",
+  "license": "ISC",
+  "dependencies": {
+    "csv2json": "^1.3.0",
+    "firebase-admin": "^5.0.0"
+  }
+}
