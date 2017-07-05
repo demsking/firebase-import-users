@@ -1,7 +1,8 @@
-CREDENTIALS ?= ./credentials.json
-LIST ?= ./newsletter-list.csv
+GOOGLE_APPLICATION_CREDENTIALS ?= ./credentials.json
+CREDENTIALS ?= $(GOOGLE_APPLICATION_CREDENTIALS)
+USERS_LIST ?= ./newsletter-list.csv
 LOG ?= log
-LISTJSON ?= $(LIST:%.csv=%.json)
+LISTJSON ?= $(USERS_LIST:%.csv=%.json)
 BATCH_SIZE ?= 1000
 
 n := $(shell cat $(LISTJSON) | jq '. | length')
@@ -15,11 +16,11 @@ ifneq ($(batch-iteration-remainder),0)
 endif
 
 convert-list:
-	./node_modules/.bin/csv2json $(LIST) $(LISTJSON)
+	./node_modules/.bin/csv2json $(USERS_LIST) $(LISTJSON)
 
 .SILENT: batch retry
 
-batch: convert-list
+batch-import: convert-list
 	mkdir -p $(LOG)
 
 	echo "LIST_LENGTH: $(n)"
